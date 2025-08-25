@@ -1,86 +1,144 @@
+📋 Estrutura do Projeto Developer Evaluation:
+markdown
 # Developer Evaluation Project
 
-`READ CAREFULLY`
+## 📚 Instructions
+**Prazo: 7 dias corridos a partir do recebimento**
 
-## Instructions
-**The test below will have up to 7 calendar days to be delivered from the date of receipt of this manual.**
+- [ ] Código versionado em repositório Github público
+- [ ] Upload deste template no repositório
+- [ ] Instruções de configuração, execução e testes
+- [ ] Documentação e organização consideradas na avaliação
 
-- The code must be versioned in a public Github repository and a link must be sent for evaluation once completed
-- Upload this template to your repository and start working from it
-- Read the instructions carefully and make sure all requirements are being addressed
-- The repository must provide instructions on how to configure, execute and test the project
-- Documentation and overall organization will also be taken into consideration
+## 🎯 Use Case: API de Registros de Vendas
 
-## Use Case
-**You are a developer on the DeveloperStore team. Now we need to implement the API prototypes.**
+### Requisitos da API (CRUD Completo):
+- [ ] Número da venda
+- [ ] Data da venda  
+- [ ] Cliente
+- [ ] Valor total da venda
+- [ ] Filial onde a venda foi realizada
+- [ ] Produtos (com quantidades, preços unitários, descontos)
+- [ ] Valor total por item
+- [ ] Status Cancelada/Não Cancelada
 
-As we work with `DDD`, to reference entities from other domains, we use the `External Identities` pattern with denormalization of entity descriptions.
+### Eventos (Diferencial):
+- [ ] SaleCreated
+- [ ] SaleModified  
+- [ ] SaleCancelled
+- [ ] ItemCancelled
 
-Therefore, you will write an API (complete CRUD) that handles sales records. The API needs to be able to inform:
+### 📊 Business Rules:
+- [ ] 4+ itens idênticos: 10% desconto
+- [ ] 10-20 itens idênticos: 20% desconto
+- [ ] Limite máximo: 20 itens por produto
+- [ ] Sem desconto para menos de 4 itens
 
-* Sale number
-* Date when the sale was made
-* Customer
-* Total sale amount
-* Branch where the sale was made
-* Products
-* Quantities
-* Unit prices
-* Discounts
-* Total amount for each item
-* Cancelled/Not Cancelled
+## 🛠 Tech Stack
 
-It's not mandatory, but it would be a differential to build code for publishing events of:
-* SaleCreated
-* SaleModified
-* SaleCancelled
-* ItemCancelled
+### Backend:
+- .NET 8
+- Entity Framework Core
+- SQL Server
+- MediatR (CQRS)
+- AutoMapper
+- FluentValidation
+- JWT Authentication
 
-If you write the code, **it's not required** to actually publish to any Message Broker. You can log a message in the application log or however you find most convenient.
+### Testing:
+- xUnit
+- Moq
+- Integration Tests
 
-### Business Rules
+### Frontend (Diferencial):
+- React + Vite
+- Ant Design
+- Axios
 
-* Purchases above 4 identical items have a 10% discount
-* Purchases between 10 and 20 identical items have a 20% discount
-* It's not possible to sell above 20 identical items
-* Purchases below 4 items cannot have a discount
+## 📁 Project Structure
+DeveloperEvaluation/
+├── src/
+│ ├── Core/
+│ │ ├── Domain/
+│ │ │ ├── Entities/
+│ │ │ ├── ValueObjects/
+│ │ │ ├── Enums/
+│ │ │ └── Events/
+│ │ ├── Application/
+│ │ │ ├── Features/
+│ │ │ ├── Common/
+│ │ │ └── Interfaces/
+│ │ └── Infrastructure/
+│ │ ├── Data/
+│ │ ├── Repositories/
+│ │ └── Services/
+│ ├── WebApi/
+│ │ ├── Controllers/
+│ │ ├── Middleware/
+│ │ └── Features/
+│ └── Tests/
+│ ├── UnitTests/
+│ └── IntegrationTests/
+├── docs/
+│ ├── overview.md
+│ ├── tech-stack.md
+│ ├── frameworks.md
+│ └── api/
+└── README.md
 
-These business rules define quantity-based discounting tiers and limitations:
+text
 
-1. Discount Tiers:
-   - 4+ items: 10% discount
-   - 10-20 items: 20% discount
+## 🚀 Como Executar
 
-2. Restrictions:
-   - Maximum limit: 20 items per product
-   - No discounts allowed for quantities below 4 items
+### Pré-requisitos:
+- .NET 8 SDK
+- SQL Server 2019+
+- Node.js (para frontend)
 
-## Overview
-This section provides a high-level overview of the project and the various skills and competencies it aims to assess for developer candidates. 
+### Backend:
+```bash
+cd src/WebApi
+dotnet restore
+dotnet ef database update
+dotnet run
+Frontend (opcional):
+bash
+cd frontend
+npm install
+npm run dev
+📋 API Endpoints
+Sales:
+GET /api/sales - Listar vendas
 
-See [Overview](/.doc/overview.md)
+GET /api/sales/{id} - Buscar venda por ID
 
-## Tech Stack
-This section lists the key technologies used in the project, including the backend, testing, frontend, and database components. 
+POST /api/sales - Criar nova venda
 
-See [Tech Stack](/.doc/tech-stack.md)
+PUT /api/sales/{id} - Atualizar venda
 
-## Frameworks
-This section outlines the frameworks and libraries that are leveraged in the project to enhance development productivity and maintainability. 
+DELETE /api/sales/{id} - Cancelar venda
 
-See [Frameworks](/.doc/frameworks.md)
+Products:
+GET /api/products - Listar produtos
 
-<!-- 
-## API Structure
-This section includes links to the detailed documentation for the different API resources:
-- [API General](./docs/general-api.md)
-- [Products API](/.doc/products-api.md)
-- [Carts API](/.doc/carts-api.md)
-- [Users API](/.doc/users-api.md)
-- [Auth API](/.doc/auth-api.md)
--->
+Customers:
+GET /api/customers - Listar clientes
 
-## Project Structure
-This section describes the overall structure and organization of the project files and directories. 
+🧪 Testing
+bash
+# Unit tests
+dotnet test src/Tests/UnitTests/
 
-See [Project Structure](/.doc/project-structure.md)
+# Integration tests  
+dotnet test src/Tests/IntegrationTests/
+📊 Regras de Negócio Implementadas
+✅ Validação de quantidade máxima (20 itens)
+✅ Cálculo automático de descontos:
+
+4-9 itens: 10% desconto
+
+10-20 itens: 20% desconto
+
+<4 itens: sem desconto
+
+✅ Eventos de domínio (SaleCreated, SaleModified, etc.)
