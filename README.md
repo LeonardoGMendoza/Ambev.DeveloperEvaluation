@@ -1,3 +1,4 @@
+<img width="1915" height="849" alt="image" src="https://github.com/user-attachments/assets/b3de23e1-c4bf-43ad-9863-e487de579069" />
 📋 Estrutura do Projeto Developer Evaluation:
 markdown
 # Developer Evaluation Project
@@ -54,6 +55,7 @@ markdown
 - React + Vite
 - Ant Design
 - Axios
+<img width="1909" height="928" alt="image" src="https://github.com/user-attachments/assets/a9d63ab7-91ca-42ea-b584-9d48ddc02c74" />
 
 ## 📁 Project Structure
 DeveloperEvaluation/
