@@ -96,6 +96,7 @@ text
 - .NET 8 SDK
 - SQL Server 2019+
 - Node.js (para frontend)
+<img width="1915" height="996" alt="image" src="https://github.com/user-attachments/assets/cd2398bf-9ab7-4513-a543-a965e8ed4904" />
 
 ### Backend:
 ```bash
